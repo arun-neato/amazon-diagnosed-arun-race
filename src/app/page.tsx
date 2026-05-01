@@ -1,65 +1,203 @@
-import Image from "next/image";
+import Link from "next/link";
+import { Header } from "@/components/header";
+import { Footer } from "@/components/footer";
+import { FAQ } from "@/components/faq";
 
-export default function Home() {
+export default function HomePage() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
+    <>
+      <Header />
+      <main className="flex-1">
+        {/* Hero */}
+        <section className="bg-brand-almond">
+          <div className="mx-auto max-w-6xl px-6 pb-20 pt-16 sm:pb-28 sm:pt-24">
+            <h1
+              className="font-extrabold text-brand-vault"
+              style={{
+                fontSize: "clamp(2.5rem, 5vw, 4.5rem)",
+                lineHeight: 1.05,
+              }}
             >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
+              Amazon.
+              <br />
+              Diagnosed.
+            </h1>
+
+            <p className="mt-6 max-w-[700px] text-lg leading-relaxed text-brand-vault sm:text-xl">
+              Eight questions. Ninety seconds. We grade your Amazon against the
+              top 10% in your category and put a dollar number on the gap.
+            </p>
+
+            {/* Trust strip */}
+            <div className="mt-10 flex flex-col gap-4 text-sm text-brand-sesame sm:flex-row sm:flex-wrap sm:items-start sm:gap-0 sm:divide-x sm:divide-brand-backbar">
+              <span className="sm:pr-5">
+                Built on a 540M-ASIN dataset and Neato&apos;s portfolio P&amp;L
+                benchmarks
+              </span>
+              <span className="sm:px-5">
+                Calibrated for $10M+ brands in pet, food/bev, beauty,
+                supplements
+              </span>
+              <span className="sm:px-5">
+                Methodology and sample size published on every score
+              </span>
+              <span className="sm:pl-5">
+                Scorecard hits your inbox in under two minutes
+              </span>
+            </div>
+
+            {/* Killer line */}
+            <p className="mt-10 max-w-[700px] text-base italic text-brand-sesame">
+              Most brands optimize Amazon for revenue. Top-decile brands
+              optimize for profit per impression. Your dashboard shows you the
+              first. Ours shows you the second.
+            </p>
+
+            {/* CTA */}
+            <div className="mt-10">
+              <Link
+                href="/start"
+                className="inline-block rounded-md bg-brand-tender px-8 py-4 text-base font-semibold text-white transition-colors hover:bg-brand-tender/90"
+              >
+                Run the diagnostic
+              </Link>
+              <p className="mt-3 max-w-[540px] text-sm text-brand-sesame">
+                We&apos;ve operated Amazon for $10M+ brands across pet, food,
+                beauty, and supplements. The score grades the operating model,
+                not the operator.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* Validators */}
+        <section className="border-t border-brand-backbar bg-brand-oat">
+          <div className="mx-auto grid max-w-6xl gap-10 px-6 py-16 sm:grid-cols-3 sm:gap-12 sm:py-20">
+            <div>
+              <p className="text-lg font-bold text-brand-vault">
+                540M+ ASINs in the benchmark dataset
+              </p>
+              <p className="mt-2 text-sm leading-relaxed text-brand-sesame">
+                SmartScout backbone + Neato Impact portfolio overlay.
+              </p>
+            </div>
+            <div>
+              <p className="text-lg font-bold text-brand-vault">
+                n= published on every score
+              </p>
+              <p className="mt-2 text-sm leading-relaxed text-brand-sesame">
+                If we don&apos;t have enough peer data in your category, we
+                label the score directional. We don&apos;t fake it.
+              </p>
+            </div>
+            <div>
+              <p className="text-lg font-bold text-brand-vault">
+                Calibrated for pet, food/bev, beauty, supplements
+              </p>
+              <p className="mt-2 text-sm leading-relaxed text-brand-sesame">
+                Categories where Neato has operating P&amp;L depth. Other
+                categories use SmartScout-only benchmarks (and we&apos;ll tell
+                you that on the score).
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* Three personas */}
+        <section className="bg-brand-almond">
+          <div className="mx-auto max-w-6xl px-6 py-16 sm:py-20">
+            <h2 className="text-2xl font-bold text-brand-vault sm:text-3xl">
+              Built for three people who keep different scoreboards.
+            </h2>
+
+            <div className="mt-10 space-y-8">
+              <div className="border-l-2 border-brand-tender pl-6">
+                <p className="text-base leading-relaxed text-brand-vault">
+                  <span className="font-bold">CEO</span> &mdash; you want to
+                  know whether the brand beating you on Page 1 is also growing
+                  2x.{" "}
+                  <span className="font-semibold text-brand-tender">
+                    Growth Score
+                  </span>{" "}
+                  answers it.
+                </p>
+              </div>
+              <div className="border-l-2 border-brand-tender pl-6">
+                <p className="text-base leading-relaxed text-brand-vault">
+                  <span className="font-bold">CFO</span> &mdash; you want to
+                  know which Amazon line items leak three to seven margin points
+                  without surfacing on a P&amp;L line.{" "}
+                  <span className="font-semibold text-brand-tender">
+                    Profit Score
+                  </span>{" "}
+                  answers it.
+                </p>
+              </div>
+              <div className="border-l-2 border-brand-tender pl-6">
+                <p className="text-base leading-relaxed text-brand-vault">
+                  <span className="font-bold">VP eCom</span> &mdash; you want
+                  to know your Buy Box health, unauthorized-seller exposure, and
+                  where your content stacks.{" "}
+                  <span className="font-semibold text-brand-tender">
+                    Defense Score
+                  </span>{" "}
+                  answers it.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* FAQ */}
+        <section className="border-t border-brand-backbar bg-brand-oat">
+          <div className="mx-auto max-w-6xl px-6 py-16 sm:py-20">
+            <h2 className="text-2xl font-bold text-brand-vault sm:text-3xl">
+              The five questions every CFO asks before clicking.
+            </h2>
+            <div className="mt-10">
+              <FAQ />
+            </div>
+          </div>
+        </section>
+
+        {/* Methodology card */}
+        <section className="bg-brand-almond">
+          <div className="mx-auto max-w-6xl px-6 py-16 sm:py-20">
+            <div className="rounded-lg border border-brand-backbar bg-white p-8 sm:p-10">
+              <p className="text-base leading-relaxed text-brand-vault">
+                <span className="font-bold">The math is published.</span> Four
+                inputs per sub-score, all sourced (SmartScout, Neato Flow,
+                portfolio P&amp;L benchmarks). Sample size visible on every
+                line.{" "}
+                <Link
+                  href="/methodology"
+                  className="font-semibold text-brand-tender underline decoration-brand-tender/30 underline-offset-2 transition-colors hover:text-brand-tender/80"
+                >
+                  Read the full methodology &rarr;
+                </Link>
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* Final CTA */}
+        <section className="border-t border-brand-backbar bg-brand-oat">
+          <div className="mx-auto max-w-6xl px-6 py-16 text-center sm:py-20">
+            <h2 className="text-2xl font-bold text-brand-vault sm:text-3xl">
+              Ready to see where you sit?
+            </h2>
+            <div className="mt-8">
+              <Link
+                href="/start"
+                className="inline-block rounded-md bg-brand-tender px-8 py-4 text-base font-semibold text-white transition-colors hover:bg-brand-tender/90"
+              >
+                Run the diagnostic
+              </Link>
+            </div>
+          </div>
+        </section>
       </main>
-    </div>
+      <Footer />
+    </>
   );
 }
