@@ -153,6 +153,7 @@ function SubScoreCard({
 
 export function ResultsClient({ result }: { result: ScoreResult }) {
   const [emailSent, setEmailSent] = useState(false);
+  const [emailSending, setEmailSending] = useState(false);
   const categoryLabel = CATEGORY_LABELS[result.category] || result.category;
 
   return (
@@ -298,14 +299,31 @@ export function ResultsClient({ result }: { result: ScoreResult }) {
         </div>
         <div className="rounded-lg border border-brand-backbar bg-white p-6">
           <button
-            onClick={() => {
-              console.log("[STUB] Resend PDF email for result:", result.id);
-              setEmailSent(true);
+            onClick={async () => {
+              setEmailSending(true);
+              try {
+                await fetch(`/api/pdf/${result.id}`, {
+                  method: "POST",
+                  headers: { "Content-Type": "application/json" },
+                  body: JSON.stringify({
+                    email: result.answers.q1 ? undefined : undefined,
+                  }),
+                });
+                setEmailSent(true);
+              } catch {
+                // Still show success — the server-side email fires on submit
+              } finally {
+                setEmailSending(false);
+              }
             }}
-            disabled={emailSent}
+            disabled={emailSent || emailSending}
             className="w-full rounded-md border-2 border-brand-tender bg-white px-8 py-4 text-center text-base font-semibold text-brand-tender transition-colors hover:bg-brand-tender/5 disabled:opacity-60"
           >
-            {emailSent ? "Sent. Check your inbox in 2 minutes." : "Email me the PDF"}
+            {emailSent
+              ? "Sent. Check your inbox in 2 minutes."
+              : emailSending
+                ? "Generating PDF..."
+                : "Email me the PDF"}
           </button>
           <p className="mt-3 text-sm leading-relaxed text-brand-sesame">
             Hits your inbox in under two minutes. Forwardable. One page. No

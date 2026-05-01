@@ -11,7 +11,7 @@ export async function POST(request: Request) {
 
     const gateId = uuid();
 
-    saveGate(gateId, {
+    await saveGate(gateId, {
       answers: parsed.answers,
       email: parsed.email,
       firstName: parsed.firstName,

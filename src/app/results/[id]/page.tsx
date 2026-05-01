@@ -10,7 +10,7 @@ export default async function ResultsPage({
   params: Promise<{ id: string }>;
 }) {
   const { id } = await params;
-  const result = getResult(id);
+  const result = await getResult(id);
 
   if (!result) {
     notFound();

@@ -1,66 +1,99 @@
 /**
- * Persistence layer — v1 uses in-memory Map with JSON serialization.
+ * Persistence layer — Vercel Blob with in-memory fallback.
  *
- * For Vercel serverless (ephemeral), this means data persists only within
- * a single function invocation. For v1 demo purposes this is acceptable:
- * the submit-final endpoint computes + stores + redirects in one request,
- * and the results page reads from the same invocation context via a cookie/URL.
- *
- * For production: swap to Vercel KV, Vercel Postgres, or Vercel Blob.
- * TODO(env): swap when persistence backend is configured.
+ * When BLOB_READ_WRITE_TOKEN is set, data persists as JSON files in Vercel Blob
+ * and survives cold starts. When unset, falls back to in-memory Map (dev/demo).
  */
 
+import { put, head, list } from "@vercel/blob";
 import { type ScoreResult } from "./scoring";
 
-// In serverless, each cold start gets a fresh Map. For the demo flow
-// (submit → redirect → read), we write results to a global that persists
-// within the same Node.js process (works for Vercel's function reuse).
-const results = new Map<string, ScoreResult>();
-
-// Gate submissions (Q1-Q6 + email)
-const gates = new Map<
-  string,
-  {
-    answers: Record<string, string | string[]>;
-    email: string;
-    firstName: string;
-    company: string;
-    role: string;
-    category: string;
-  }
->();
-
-export function saveGate(
-  id: string,
-  data: {
-    answers: Record<string, string | string[]>;
-    email: string;
-    firstName: string;
-    company: string;
-    role: string;
-    category: string;
-  },
-): void {
-  gates.set(id, data);
-}
-
-export function getGate(
-  id: string,
-): {
+export type GateData = {
   answers: Record<string, string | string[]>;
   email: string;
   firstName: string;
   company: string;
   role: string;
   category: string;
-} | undefined {
-  return gates.get(id);
+};
+
+// --- In-memory fallback ---
+const memResults = new Map<string, ScoreResult>();
+const memGates = new Map<string, GateData>();
+
+function hasBlobToken(): boolean {
+  return Boolean(process.env.BLOB_READ_WRITE_TOKEN);
 }
 
-export function saveResult(result: ScoreResult): void {
-  results.set(result.id, result);
+// --- Gate operations ---
+
+export async function saveGate(id: string, data: GateData): Promise<void> {
+  if (hasBlobToken()) {
+    await put(`gates/gate-${id}.json`, JSON.stringify(data), {
+      access: "public",
+      addRandomSuffix: false,
+    });
+  }
+  memGates.set(id, data);
 }
 
-export function getResult(id: string): ScoreResult | undefined {
-  return results.get(id);
+export async function getGate(id: string): Promise<GateData | undefined> {
+  // Try memory first (same invocation)
+  const mem = memGates.get(id);
+  if (mem) return mem;
+
+  if (!hasBlobToken()) return undefined;
+
+  try {
+    // List blobs to find the gate file
+    const { blobs } = await list({ prefix: `gates/gate-${id}.json` });
+    if (blobs.length === 0) return undefined;
+
+    const res = await fetch(blobs[0].url);
+    if (!res.ok) return undefined;
+
+    const data = (await res.json()) as GateData;
+    memGates.set(id, data); // cache in memory
+    return data;
+  } catch (err) {
+    console.error("[store] Failed to read gate from blob:", err);
+    return undefined;
+  }
+}
+
+// --- Result operations ---
+
+export async function saveResult(result: ScoreResult): Promise<void> {
+  if (hasBlobToken()) {
+    await put(`results/result-${result.id}.json`, JSON.stringify(result), {
+      access: "public",
+      addRandomSuffix: false,
+    });
+  }
+  memResults.set(result.id, result);
+}
+
+export async function getResult(
+  id: string,
+): Promise<ScoreResult | undefined> {
+  // Try memory first
+  const mem = memResults.get(id);
+  if (mem) return mem;
+
+  if (!hasBlobToken()) return undefined;
+
+  try {
+    const { blobs } = await list({ prefix: `results/result-${id}.json` });
+    if (blobs.length === 0) return undefined;
+
+    const res = await fetch(blobs[0].url);
+    if (!res.ok) return undefined;
+
+    const data = (await res.json()) as ScoreResult;
+    memResults.set(data.id, data); // cache in memory
+    return data;
+  } catch (err) {
+    console.error("[store] Failed to read result from blob:", err);
+    return undefined;
+  }
 }

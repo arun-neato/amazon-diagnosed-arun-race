@@ -3,14 +3,14 @@ import { finalSchema } from "@/lib/validation";
 import { getGate, saveResult } from "@/lib/store";
 import { score, type Answers } from "@/lib/scoring";
 import { submitToHubSpot } from "@/lib/integrations/hubspot";
-import { sendScorecardEmail } from "@/lib/integrations/resend";
+import { sendScorecardEmail } from "@/lib/email";
 
 export async function POST(request: Request) {
   try {
     const body = await request.json();
     const parsed = finalSchema.parse(body);
 
-    const gate = getGate(parsed.gateId);
+    const gate = await getGate(parsed.gateId);
     if (!gate) {
       return NextResponse.json(
         { error: "Gate session not found. Please restart the diagnostic." },
@@ -32,9 +32,13 @@ export async function POST(request: Request) {
     };
 
     const result = score(answers);
-    saveResult(result);
+    await saveResult(result);
 
-    // Fire-and-forget: HubSpot final + email
+    // Build results URL from request origin
+    const origin = new URL(request.url).origin;
+    const resultsUrl = `${origin}/results/${result.id}`;
+
+    // Fire-and-forget: HubSpot + scorecard email
     submitToHubSpot({
       email: gate.email,
       firstName: gate.firstName,
@@ -46,8 +50,8 @@ export async function POST(request: Request) {
     sendScorecardEmail({
       to: gate.email,
       firstName: gate.firstName,
-      resultId: result.id,
-      overallScore: result.scores.overall,
+      result,
+      resultsUrl,
     }).catch((err) => console.error("[Resend error]", err));
 
     return NextResponse.json({ resultId: result.id });
