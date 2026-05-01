@@ -3,6 +3,8 @@ import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import { FAQ } from "@/components/faq";
 import { StickyCTA } from "@/components/sticky-cta";
+import { SocialProof } from "@/components/social-proof";
+import { SampleScorecard } from "@/components/sample-scorecard";
 
 export default function HomePage() {
   return (
@@ -130,6 +132,9 @@ export default function HomePage() {
           </div>
         </section>
 
+        {/* Stat-based social proof */}
+        <SocialProof />
+
         {/* Three personas */}
         <section className="bg-brand-almond">
           <div className="mx-auto max-w-6xl px-6 py-16 sm:py-20">
@@ -174,6 +179,9 @@ export default function HomePage() {
             </div>
           </div>
         </section>
+
+        {/* Sample scorecard */}
+        <SampleScorecard />
 
         {/* FAQ */}
         <section className="border-t border-brand-backbar bg-brand-oat">

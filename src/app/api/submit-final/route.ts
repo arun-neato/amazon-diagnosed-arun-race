@@ -4,6 +4,7 @@ import { getGate, saveResult } from "@/lib/store";
 import { score, type Answers } from "@/lib/scoring";
 import { submitToHubSpot } from "@/lib/integrations/hubspot";
 import { sendScorecardEmail } from "@/lib/email";
+import { incrementCount } from "@/lib/counter";
 
 export async function POST(request: Request) {
   try {
@@ -53,6 +54,11 @@ export async function POST(request: Request) {
       result,
       resultsUrl,
     }).catch((err) => console.error("[Resend error]", err));
+
+    // Increment diagnostic completion counter (fire-and-forget)
+    incrementCount().catch((err) =>
+      console.error("[counter error]", err),
+    );
 
     return NextResponse.json({ resultId: result.id, result });
   } catch (error) {

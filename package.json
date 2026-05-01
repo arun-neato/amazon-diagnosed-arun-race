@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@sparticuz/chromium": "^148.0.0",
+    "@upstash/redis": "^1.37.0",
     "@vercel/blob": "^2.3.3",
     "next": "16.2.4",
     "puppeteer-core": "^24.42.0",
