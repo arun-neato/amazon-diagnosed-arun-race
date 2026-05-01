@@ -32,7 +32,7 @@ export function StickyCTA() {
       </div>
 
       {/* Desktop: sticky side card */}
-      <div className="fixed bottom-8 right-8 z-50 hidden w-[280px] rounded-lg border border-brand-backbar bg-white p-5 shadow-sm sm:block">
+      <div className="fixed bottom-8 right-8 z-50 hidden w-[280px] rounded-lg border border-brand-backbar bg-white p-5 sm:block">
         <p className="text-sm font-bold text-brand-vault">
           Ready to see where you sit?
         </p>

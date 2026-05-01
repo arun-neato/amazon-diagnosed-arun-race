@@ -54,7 +54,7 @@ export async function POST(request: Request) {
       resultsUrl,
     }).catch((err) => console.error("[Resend error]", err));
 
-    return NextResponse.json({ resultId: result.id });
+    return NextResponse.json({ resultId: result.id, result });
   } catch (error) {
     console.error("[submit-final error]", error);
     return NextResponse.json(

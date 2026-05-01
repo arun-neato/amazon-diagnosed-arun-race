@@ -285,7 +285,7 @@ export default function StartPage() {
           {step > 0 && step < 6 && (
             <button
               onClick={handleBack}
-              className="mt-6 text-sm font-medium text-brand-sesame transition-colors hover:text-brand-vault"
+              className="mt-6 min-h-[44px] px-2 py-2 text-sm font-medium text-brand-sesame transition-colors hover:text-brand-vault"
             >
               &larr; Back
             </button>

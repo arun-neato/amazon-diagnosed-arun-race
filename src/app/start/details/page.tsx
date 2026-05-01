@@ -74,8 +74,12 @@ export default function DetailsPage() {
         return;
       }
 
-      const { resultId } = await res.json();
+      const { resultId, result } = await res.json();
       sessionStorage.removeItem("gateId");
+      // Cache result client-side for immediate rendering (survives serverless cold starts)
+      if (result) {
+        sessionStorage.setItem(`result-${resultId}`, JSON.stringify(result));
+      }
       router.push(`/results/${resultId}`);
     } catch {
       setError("Network error. Please try again.");
@@ -184,7 +188,7 @@ export default function DetailsPage() {
 
               <button
                 onClick={() => setStep(0)}
-                className="mt-6 text-sm font-medium text-brand-sesame transition-colors hover:text-brand-vault"
+                className="mt-6 min-h-[44px] px-2 py-2 text-sm font-medium text-brand-sesame transition-colors hover:text-brand-vault"
               >
                 &larr; Back
               </button>
@@ -253,7 +257,7 @@ export default function DetailsPage() {
 
               <button
                 onClick={() => setStep(1)}
-                className="mt-6 text-sm font-medium text-brand-sesame transition-colors hover:text-brand-vault"
+                className="mt-6 min-h-[44px] px-2 py-2 text-sm font-medium text-brand-sesame transition-colors hover:text-brand-vault"
               >
                 &larr; Back
               </button>

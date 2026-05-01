@@ -112,7 +112,7 @@ const GAP_LABELS: Record<string, string> = {
   q2: "Contribution margin retention — fee variance and ad efficiency leak",
   q3: "Operating model misfit for revenue scale — capacity gap",
   q6: "Category share trajectory — losing ground on Page 1",
-  q1: "Sub-scale on Amazon — under-leveraged channel",
+  q1: "Sub-scale on Amazon — channel not yet earning its weight",
   q8: "Conservative growth posture limits available upside",
 };
 
