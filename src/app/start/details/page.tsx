@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { QUESTIONS } from "@/lib/questions";
 import { Header } from "@/components/header";
@@ -8,24 +8,33 @@ import { Header } from "@/components/header";
 const Q7 = QUESTIONS[6]; // index 6 = Q7
 const Q8 = QUESTIONS[7]; // index 7 = Q8
 
+function useGateId() {
+  const router = useRouter();
+  const [gateId] = useState<string | null>(() => {
+    if (typeof window === "undefined") return null;
+    return sessionStorage.getItem("gateId");
+  });
+  const redirected = useRef(false);
+
+  useEffect(() => {
+    if (!gateId && !redirected.current) {
+      redirected.current = true;
+      router.push("/start");
+    }
+  }, [gateId, router]);
+
+  return gateId;
+}
+
 export default function DetailsPage() {
+  const gateId = useGateId();
   const router = useRouter();
   const [step, setStep] = useState(0); // 0=Q7, 1=Q8, 2=Q9
   const [q7, setQ7] = useState<string[]>([]);
   const [q8, setQ8] = useState("");
   const [q9, setQ9] = useState("");
-  const [gateId, setGateId] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState("");
-
-  useEffect(() => {
-    const stored = sessionStorage.getItem("gateId");
-    if (!stored) {
-      router.push("/start");
-      return;
-    }
-    setGateId(stored);
-  }, [router]);
 
   const toggleQ7 = (letter: string) => {
     setQ7((prev) => {
