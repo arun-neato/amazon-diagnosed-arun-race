@@ -3,7 +3,7 @@ import Link from "next/link";
 export function Footer() {
   return (
     <footer className="mt-auto border-t border-brand-backbar bg-brand-almond">
-      <div className="mx-auto flex max-w-6xl flex-col items-center gap-4 px-6 py-8 sm:flex-row sm:justify-between">
+      <div className="mx-auto flex max-w-6xl flex-col items-center gap-4 px-6 pb-24 pt-8 sm:flex-row sm:justify-between sm:pb-8">
         <p className="text-sm text-brand-sesame">
           &copy; 2026 Neato. All rights reserved.
         </p>

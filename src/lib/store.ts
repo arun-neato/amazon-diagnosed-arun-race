@@ -5,7 +5,7 @@
  * and survives cold starts. When unset, falls back to in-memory Map (dev/demo).
  */
 
-import { put, head, list } from "@vercel/blob";
+import { put, list } from "@vercel/blob";
 import { type ScoreResult } from "./scoring";
 
 export type GateData = {

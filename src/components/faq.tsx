@@ -34,6 +34,7 @@ export function FAQ() {
         <div key={i}>
           <button
             onClick={() => setOpenIndex(openIndex === i ? null : i)}
+            aria-expanded={openIndex === i}
             className="flex w-full items-center justify-between py-5 text-left"
           >
             <span className="pr-4 text-base font-semibold text-brand-vault">
@@ -53,6 +54,7 @@ export function FAQ() {
                 fill="none"
                 stroke="currentColor"
                 strokeWidth="1.5"
+                aria-hidden="true"
               >
                 <line x1="10" y1="4" x2="10" y2="16" />
                 <line x1="4" y1="10" x2="16" y2="10" />

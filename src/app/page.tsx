@@ -2,6 +2,7 @@ import Link from "next/link";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import { FAQ } from "@/components/faq";
+import { StickyCTA } from "@/components/sticky-cta";
 
 export default function HomePage() {
   return (
@@ -28,18 +29,16 @@ export default function HomePage() {
               top 10% in your category and put a dollar number on the gap.
             </p>
 
-            {/* Trust strip */}
-            <div className="mt-10 flex flex-col gap-4 text-sm text-brand-sesame sm:flex-row sm:flex-wrap sm:items-start sm:gap-0 sm:divide-x sm:divide-brand-backbar">
+            {/* Trust strip — CRO: tightened to 4, lead with highest-trust signals */}
+            <div className="mt-8 flex flex-col gap-3 text-sm text-brand-sesame sm:flex-row sm:flex-wrap sm:items-start sm:gap-0 sm:divide-x sm:divide-brand-backbar">
               <span className="sm:pr-5">
-                Built on a 540M-ASIN dataset and Neato&apos;s portfolio P&amp;L
-                benchmarks
-              </span>
-              <span className="sm:px-5">
-                Calibrated for $10M+ brands in pet, food/bev, beauty,
-                supplements
+                No P&amp;L upload. No screen share.
               </span>
               <span className="sm:px-5">
                 Methodology and sample size published on every score
+              </span>
+              <span className="sm:px-5">
+                Built on 540M+ ASINs across pet, food/bev, beauty, supplements
               </span>
               <span className="sm:pl-5">
                 Scorecard hits your inbox in under two minutes
@@ -47,14 +46,14 @@ export default function HomePage() {
             </div>
 
             {/* Killer line */}
-            <p className="mt-10 max-w-[700px] text-base italic text-brand-sesame">
+            <p className="mt-8 max-w-[700px] text-base italic text-brand-sesame">
               Most brands optimize Amazon for revenue. Top-decile brands
               optimize for profit per impression. Your dashboard shows you the
               first. Ours shows you the second.
             </p>
 
             {/* CTA */}
-            <div className="mt-10">
+            <div className="mt-8">
               <Link
                 href="/start"
                 className="inline-block rounded-md bg-brand-tender px-8 py-4 text-base font-semibold text-white transition-colors hover:bg-brand-tender/90"
@@ -67,6 +66,34 @@ export default function HomePage() {
                 not the operator.
               </p>
             </div>
+          </div>
+        </section>
+
+        {/* Social proof / number proofpoints — CRO: concrete numbers above fold */}
+        <section className="border-t border-brand-backbar bg-white">
+          <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-center gap-x-8 gap-y-3 px-6 py-5 text-center text-sm font-medium text-brand-sesame sm:gap-x-12">
+            <span>
+              <span className="font-bold text-brand-vault">540M+</span> ASINs
+              benchmarked
+            </span>
+            <span className="hidden text-brand-backbar sm:inline">|</span>
+            <span>
+              <span className="font-bold text-brand-vault">4</span> categories
+              with P&amp;L depth
+            </span>
+            <span className="hidden text-brand-backbar sm:inline">|</span>
+            <span>
+              n= published on <span className="font-bold text-brand-vault">every</span> score
+            </span>
+            <span className="hidden text-brand-backbar sm:inline">|</span>
+            <span>
+              <span className="font-bold text-brand-vault">$10M&ndash;$100M+</span> brands
+              calibrated
+            </span>
+            <span className="hidden text-brand-backbar sm:inline">|</span>
+            <span>
+              Free. <span className="font-bold text-brand-vault">No sales call</span> attached.
+            </span>
           </div>
         </section>
 
@@ -198,6 +225,7 @@ export default function HomePage() {
         </section>
       </main>
       <Footer />
+      <StickyCTA />
     </>
   );
 }

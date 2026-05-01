@@ -158,6 +158,10 @@ export default function StartPage() {
                   questions, one optional. The full scorecard hits your inbox in
                   under two minutes.
                 </p>
+                <p className="mt-1.5 text-xs italic text-brand-sesame/70">
+                  You&apos;re 75% through. Most people finish in under 2 minutes
+                  from here.
+                </p>
 
                 <form onSubmit={handleGateSubmit} className="mt-8 space-y-5">
                   <div>
@@ -173,7 +177,7 @@ export default function StartPage() {
                       required
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
-                      className="w-full rounded-lg border-2 border-brand-backbar bg-white px-4 py-3 text-brand-vault outline-none transition-colors focus:border-brand-tender"
+                      className="w-full rounded-lg border-2 border-brand-backbar bg-white px-4 py-3 text-base text-brand-vault outline-none transition-colors focus:border-brand-tender"
                       placeholder="you@company.com"
                     />
                   </div>
@@ -190,7 +194,7 @@ export default function StartPage() {
                       required
                       value={firstName}
                       onChange={(e) => setFirstName(e.target.value)}
-                      className="w-full rounded-lg border-2 border-brand-backbar bg-white px-4 py-3 text-brand-vault outline-none transition-colors focus:border-brand-tender"
+                      className="w-full rounded-lg border-2 border-brand-backbar bg-white px-4 py-3 text-base text-brand-vault outline-none transition-colors focus:border-brand-tender"
                     />
                   </div>
                   <div>
@@ -206,7 +210,7 @@ export default function StartPage() {
                       required
                       value={company}
                       onChange={(e) => setCompany(e.target.value)}
-                      className="w-full rounded-lg border-2 border-brand-backbar bg-white px-4 py-3 text-brand-vault outline-none transition-colors focus:border-brand-tender"
+                      className="w-full rounded-lg border-2 border-brand-backbar bg-white px-4 py-3 text-base text-brand-vault outline-none transition-colors focus:border-brand-tender"
                     />
                   </div>
                   <div>
@@ -221,7 +225,7 @@ export default function StartPage() {
                       required
                       value={role}
                       onChange={(e) => setRole(e.target.value)}
-                      className="w-full rounded-lg border-2 border-brand-backbar bg-white px-4 py-3 text-brand-vault outline-none transition-colors focus:border-brand-tender"
+                      className="w-full rounded-lg border-2 border-brand-backbar bg-white px-4 py-3 text-base text-brand-vault outline-none transition-colors focus:border-brand-tender"
                     >
                       <option value="">Select your role</option>
                       {ROLE_OPTIONS.map((r) => (
@@ -243,7 +247,7 @@ export default function StartPage() {
                       required
                       value={category}
                       onChange={(e) => setCategory(e.target.value)}
-                      className="w-full rounded-lg border-2 border-brand-backbar bg-white px-4 py-3 text-brand-vault outline-none transition-colors focus:border-brand-tender"
+                      className="w-full rounded-lg border-2 border-brand-backbar bg-white px-4 py-3 text-base text-brand-vault outline-none transition-colors focus:border-brand-tender"
                     >
                       <option value="">Select your category</option>
                       {CATEGORY_OPTIONS.map((c) => (

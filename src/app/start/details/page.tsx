@@ -217,7 +217,7 @@ export default function DetailsPage() {
                   value={q9}
                   onChange={(e) => setQ9(e.target.value.toUpperCase())}
                   placeholder="B0XXXXXXXXX"
-                  className="w-full rounded-lg border-2 border-brand-backbar bg-white px-4 py-3 font-mono text-brand-vault outline-none transition-colors focus:border-brand-tender"
+                  className="w-full rounded-lg border-2 border-brand-backbar bg-white px-4 py-3 font-mono text-base text-brand-vault outline-none transition-colors focus:border-brand-tender"
                 />
                 {q9 && !/^B0[A-Z0-9]{8}$/.test(q9) && (
                   <p className="mt-1 text-xs text-brand-sesame">
