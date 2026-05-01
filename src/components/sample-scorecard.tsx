@@ -37,7 +37,7 @@ function SampleSubScoreCard({
 }) {
   return (
     <div className="rounded-lg border border-brand-backbar bg-white p-5">
-      <p className="text-[11px] font-semibold uppercase tracking-wide text-brand-sesame">
+      <p className="text-xs font-semibold uppercase tracking-wide text-brand-sesame">
         {name} Score
       </p>
       <div className="mt-1.5 flex items-baseline gap-1">
@@ -56,7 +56,7 @@ function SampleSubScoreCard({
         {band}
       </p>
       <MiniBar score={s} />
-      <div className="mt-1 flex justify-between text-[10px] text-brand-sesame">
+      <div className="mt-1 flex justify-between text-xs text-brand-sesame">
         <span>Median</span>
         <span>Top 10%</span>
       </div>
@@ -132,7 +132,7 @@ export function SampleScorecard() {
 
           {/* Top gap */}
           <div className="mt-4 flex items-start gap-3 rounded-lg border border-brand-backbar bg-white p-5">
-            <span className="flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full bg-brand-tender text-[10px] font-bold text-white">
+            <span className="flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full bg-brand-tender text-xs font-bold text-white">
               1
             </span>
             <p className="text-sm font-medium text-brand-vault">

@@ -11,7 +11,7 @@ export async function Footer() {
           <p className="text-sm text-brand-sesame">
             &copy; 2026 Neato. All rights reserved.
           </p>
-          <p className="text-xs text-brand-sesame/70">
+          <p className="text-xs text-brand-sesame">
             {count}+ brands diagnosed since launch
           </p>
         </div>

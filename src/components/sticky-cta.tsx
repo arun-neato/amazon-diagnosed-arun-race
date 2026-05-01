@@ -26,7 +26,7 @@ export function StickyCTA() {
         >
           Run the diagnostic &mdash; 90 seconds
         </Link>
-        <p className="mt-1.5 text-center text-[11px] text-brand-sesame">
+        <p className="mt-1.5 text-center text-xs text-brand-sesame">
           8 questions &middot; top 10% benchmark &middot; scorecard in 2 min
         </p>
       </div>

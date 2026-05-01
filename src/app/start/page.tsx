@@ -158,7 +158,7 @@ export default function StartPage() {
                   questions, one optional. The full scorecard hits your inbox in
                   under two minutes.
                 </p>
-                <p className="mt-1.5 text-xs italic text-brand-sesame/70">
+                <p className="mt-1.5 text-xs italic text-brand-sesame">
                   You&apos;re 75% through. Most people finish in under 2 minutes
                   from here.
                 </p>
