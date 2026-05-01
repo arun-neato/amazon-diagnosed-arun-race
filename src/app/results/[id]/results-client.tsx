@@ -6,9 +6,9 @@ import { type ScoreResult } from "@/lib/scoring";
 import { getNarrative } from "@/lib/narratives";
 
 function scoreColor(score: number): string {
-  if (score <= 39) return "var(--color-score-critical)";
-  if (score <= 69) return "var(--color-score-mid)";
-  return "var(--color-score-top)";
+  if (score <= 39) return "#A6322B";
+  if (score <= 69) return "#8B6B2C"; // darkened for WCAG 4.5:1 contrast on white
+  return "#075D44";
 }
 
 function formatDollars(n: number): string {
